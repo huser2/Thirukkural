@@ -13,7 +13,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5sp" >
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
@@ -24,3 +28,23 @@
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:textSize="12dp"/>
+    <!-- Rightend Arrow -->
+<!--ImageView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:src="@android:drawable/arrow_down_float"
+android:layout_alignParentRight="true"
+android:layout_centerVertical="true"
+    android:layout_alignParentBottom="true"/-->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/coupletNumber"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:gravity="right"
+    android:text="34"
+    android:textSize="10dp"
+    android:textStyle="bold"
+    />
+    </RelativeLayout>

@@ -149,36 +149,60 @@
 
     <string name="title_activity_item_detail">ItemDetailActivity</string>
 
-    <string name="about_thirukkural">
-        திருக்குறள் (Thirukkural) உலகப்புகழ் பெற்ற தமிழ் இலக்கியமாகும். இதனை இயற்றியவர் திருவள்ளுவர் என்று அறியப்படுபவர்.
-        இதில் 1330 குறள்கள் பத்து பத்தாக 133 அதிகாரங்களின் கீழ் தொகுக்கப் பெற்றுள்ளன. திருக்குறள் சங்க இலக்கிய வகைப்பாட்டில் பதினெண்கீழ்க்கணக்கு எனப்படும் பதினெட்டு நூல்களின் திரட்டில் இருக்கிறது. இது அடிப்படையில் ஒரு வாழ்வியல் நூல். மாந்தர்கள் தம் அகவாழ்விலும் சுமுகமாக கூடி வாழவும், புற வாழ்விலும் இன்பமுடனும் இசைவுடனும் நலமுடனும் வாழவும் தேவையான அடிப்படைப் பண்புகளை விளக்குகிறது. இந்நூல் அறம், பொருள்,
-        இன்பம் அல்லது காமம் என்னும் முப்பெரும் பிரிவுகளாய் (முப்பால்) பிரித்தும் அழகுடன் இணைத்தும் கோர்த்தும் விளக்குகிறது.
-        வாழ்வியலின் எல்லா அங்கங்களையும் திருக்குறள் கூறுவதால், அதைச் சிறப்பித்துப் பல பெயர்களால் அழைப்பர்: திருக்குறள், முப்பால், உத்தரவேதம், தெய்வநூல், பொதுமறை, பொய்யாமொழி, வாயுறை வாழ்த்து, தமிழ் மறை, திருவள்ளுவம் என்ற பெயர்கள் அதற்குரியவை. கருத்துக்களை இன, மொழி, பாலின பேதங்களின்றி காலம் கடந்தும் பொருந்துவது போல் கூறி உள்ளதால் இந்நூல் "உலகப் பொது மறை" என்றும் அழைக்கப்படுகிறது
-        திருக்குறள் - இதற்குப் பலர் உரை எழுதியுள்ளனர். அவற்றில் புகழ் வாய்ந்ததாக விளங்குவதும் அதிகமாகப் பயன்படுத்தப்பட்டதும் பரிமேலழகர் உரைதான்.
-
-    </string>
-
     <string name="about_thiruvalluvar">
+      <br/> திருக்குறள் என்னும் நூலை இயற்றிய தமிழ்ப்புலவர் . உலக தத்துவங்கள் அனைத்தையும் ஈரடிக் குறளில் சொன்ன தத்துவ மேதை.
 
-        ‘அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு’ என்று தொடங்கி, ஈரடி குறளில் உலகத் தத்துவங்கள் அனைத்தையும் ‘திருக்குறள்’ என்னும் உன்னதப் படைப்பில் மக்களுக்கு எடுத்துச் சொன்னவர், திருவள்ளுவர். உலகளாவிய தத்துவங்களைக் கொண்ட திருக்குறளைப் படைத்து, உலக இலக்கிய அரங்கில் தமிழ்மொழிக்கென்று ஓர் உயர்ந்த இடத்தை நிலைப்பெற செய்தவர். இவர் உலக மக்களால், ‘தெய்வப்புலவர்’, ‘பொய்யில் புலவர்’, ‘நாயனார்’, ‘தேவர்’, ‘செந்நாப்போதர்’, ‘பெருநாவலர்’, ‘பொய்யாமொழிப் புலவர்’ என்றெல்லாம் பல பெயர்களில் அழைக்கப்படுகிறார். அவர் எழுதிய திருக்குறள், வாழ்வியலின் எல்லா அங்கங்களையும் இனம், மொழி, பாலின பேதங்களின்றி காலம் கடந்தும் பொருந்துவது போல் கூறி உள்ளதால், திருக்குறளை சிறப்பிக்கும் விதமாக ‘உலகப் பொது மறை’, ‘முப்பால்’, ‘ஈரடி நூல்’, ‘உத்தரவேதம்’, ‘தெய்வநூல்’, ‘பொதுமறை’, ‘பொய்யாமொழி’, ‘வாயுறை வாழ்த்து’, ‘தமிழ் மறை’, ‘திருவள்ளுவம்’ போன்ற பல பெயர்களால் சிறப்பித்து அழைக்கின்றனர். அத்தகைய சிறப்புமிக்கத் திருவள்ளுவரின் வாழ்க்கை வரலாறு மற்றும் உலக இலக்கிய அரங்கில் அவர் படைத்த சாதனைகள் பற்றியறிய மேலும் தொடர்ந்து படிக்கவும்.
+\n<br/>இவர் கிறித்துக்கு 2 ஆண்டுகளுக்கு முன் பிறந்தவர் என்றும் ,கிறித்துவுக்கு 8 ஆண்டுகளுக்கு பின் பிறந்தவர் என்றும்  , நெசவுத் தொழில் செய்து வந்ததாகவும் சொல்லப்படுகிறது.
 
-வாழ்ந்த காலம்: 2 ஆம் நூறாண்டு முதல் 8 நூற்றாண்டு வரையிலான இடைப்பட்ட காலம்
+\n<br/>மதுரையில் பிறந்ததாகவும், சென்னையில் உள்ள மயிலாப்பூரில் பிறந்ததாகவும் சிலர்  கூறுகின்றனர். மேலும், அவர் ஆதி – பகவன் என்ற பெற்றோருக்குப் பிறந்ததாகவும் ,
+        இவருக்கு வாசுகி என்ற மனைவி இருந்தாகவும் சொல்கின்றனர். ஆனால், இதுவரை இவை எதுவுமே உறுதி செய்யப்படவில்லை.
+\n<br/><br/>இவர் உலக மக்களால், தெய்வப்புலவர், பொய்யில் புலவர், நாயனார், தேவர், செந்நாப்போதர், பெருநாவலர், பொய்யாமொழிப் புலவர் என்றெல்லாம் பல பெயர்களில் அழைக்கப்படுகிறார்.
 
-பிறப்பிடம்: மயிலாப்பூர், தமிழ் நாடு மாநிலம், இந்திய
+        \n\n<b>Translation</b>\n
+\n<br/>Thiruvalluvar was a celebrated Tamil poet and philosopher whose contribution to Tamil literature is the Thirukkural, a work on ethics.
+\n<br/>Thiruvalluvar is thought to have lived sometime between the 2nd century BC and the 8th century AD.
+\n<br/>This estimate is based on linguistic analysis of his writings, as there is no archaeological evidence for when he lived.
+\n<br/>He is sometimes also called Theiva Pulavar ("Divine Poet"), Valluvar, Poyyamozhi Pulavar, Senna Pothar, Gnana Vettiyan or Ayyan.
 
-பணி: புலவர்
-
-நாட்டுரிமை: இந்தியன்
-
-பிறப்பு
-
-திருவள்ளுவர் அவர்களின் பிறப்பு மற்றும் பிறப்பிடத்திற்கான சரியான சான்றுகள் இல்லை என்று தான் கூறவேண்டும். ஏனென்றால், அவர் கி.மு.31 ஆம் ஆண்டு பிறந்திருக்கிறார் என்றும், மதுரையில் பிறந்ததாகவும், சென்னையில் உள்ள மயிலாப்பூரில் பிறந்ததாகவும் சிலரும் கூறுகின்றனர். மேலும், அவர் ஆதி – பகவன் என்ற பெற்றோருக்குப் பிறந்ததாகவும் சிலர் சொல்கின்றனர். ஆனால், இதுவரை இவை எதுவுமே உறுதிப்படவில்லை.
-
-மேலும் சிலர், அவர் ஒரு கிறித்துவர் என்றும், சமண மதத்தவர் என்றும் பவுத்தர் என்றெல்லாம் கூட பொய்யானத் தகவல்களைப் பரிமாறுகின்றனர்.
+\n<br/>There are several claims regarding where he lived, but none of them have been verified. One legend associates him with Madurai, the ancient capital of the Pandya rulers who vigorously promoted Tamil literature. According to another he was born and not lived in Mylapore, a part of present day Madras, and traveled to Madurai to submit the Thirukural, for approval of the king (Pandian) and his college of poets.
 
 
     </string>
 
+    <string name="about_thirukkural">
+<br/>திருக்குறள் உலகப் புகழ் பெற்ற ஓர் தமிழ் இலக்கியம். இந்நூல் , ஏறக்குறைய 2000 ஆண்டுகளுக்கு முற்பட்டதாக கருதப்பட்டாலும், இயற்றப்பட்ட காலம் இன்னும் சரியாக வரையறுக்கப்படவில்லை.
+\n
+<br/>திருக்குறளுக்கு உலகப் பொது மறை, முப்பால், ஈரடி நூல், உத்தரவேதம், தெய்வநூல், பொதுமறை, பொய்யாமொழி, வாயுறை வாழ்த்து, தமிழ் மறை, திருவள்ளுவம் என்று வேறு பல பெயர்களும் உண்டு.
+இரண்டே அடிகளில் உலகத் தத்துவங்களைச் சொன்னதால் இதற்கு ஈரடி நூல் என்றும்,அறம், பொருள்,காமம் என்னும் முப்பெரும் பிரிவுகளைக் கொண்டதால், முப்பால் என்றும் அழைக்கப்படுகிறது .
+\n
+<br/>இந்நூல் அறத்துப்பால், பொருட்பால் மற்றும் காமத்துப்பால் (இன்பத்துப்பால்) என்னும் மூன்று பிரிவுகளைக் கொண்டது.<br/>
+\n
+• அறத்துப்பால் – முதல் பிரிவான அறத்துப்பாலில் மனசாட்சி மற்றும் மரியாதை, நல்ல நடத்தை போன்றவற்றை பாயிரவியல், இல்லறவியல், துறவறவியல், ஊழியல் என்ற உட்பிரிவுகளில் தெளிவாக எடுத்துரைக்கிறார்.<br/>\n
+• பொருட்பால் – இரண்டாவது பிரிவான பொருட்பாலில் உலக விவகாரங்களில் எவ்வாறு சரியான முறையில் நடந்து கொள்வது என்பதை அரசியல், அமைச்சியல், அங்கவியல், ஒழிபியல் போன்ற உட்பிரிவுகளில் விளக்கியுள்ளார்.<br/>\n
+• இன்பத்துப்பால் – மூன்றாவது பிரிவான இன்பத்துப்பால் அல்லது காமத்துப்பாலில், ஆண்கள் மற்றும் பெண்களுக்கிடையேயான காதல் மற்றும் இன்பத்தைத் தெளிவாக களவியல், கற்பியல் என்ற தலைப்புகளில் எடுத்துரைக்கிறார்.<br/>\n
+\n
+முதல் பிரிவில் 38 அதிகாரங்களும், இரண்டாவது பிரிவில் 70 அதிகாரங்களும் மற்றும் மூன்றாவது பிரிவில் 25 அதிகாரங்களும் உள்ளன.
+        ஒவ்வொரு அதிகாரத்திலும் பத்து  குறள்கள் என மொத்தம் 1330 குறள்கள் உள்ளன.\n\n\n
+    \n\n<b>Translation</b>\n
+        Thirukkural is one of the most revered ancient works in the Tamil language. It is considered a \'common creed\',
+        providing a guide for human morals and betterment in life. Thirukkural has been translated into several languages,
+        including a translation into Latin by Constanzo Beschi in 1730, which helped make the work known to European intellectuals.
+
+        \nThirukkuṛaḷ is a combined word formed by joining the two words Thiru
+        (meaning revered) and Kural (is a form of poem writing style, like Ballad English Poems.
+        Other forms of poem writing styles in Tamil are Venpa, Yaappu etc.).
+
+        \nThirukkuṛaḷ is divided into three sections:\n\n
+        • section one deals with Aram,good ethical behavior with conscience and honor ("right conduct"); \n
+        • section two discusses Porul,the right manner of conducting worldly affairs; \n
+        • and section three dwells on Kaamam,love between men and women.
+        The first section has 38 chapters, the second 70 chapters and the third 25 chapters.
+        Each chapter consists of 10 couplets or kurals, for a total of 1330 couplets.
+        \nAlthough two sections, Aram and Inbam, are devoted to the private life of an individual more than half the couplets in Thirukural are grouped under Porul
+        which discusses ethics in public life. Thus Thiruvalluvar gives more importance to righteous living in public life.\n\n\n\n
+
+
+    </string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_notification_detail">NotificationDetailActivity</string>
@@ -191,4 +215,5 @@
 
     <string name="search_title">Search</string>
     <string name="today_kural">இன்றைய குறள் </string>
+    <string name="search_hint">அதிகாரம் / குறள் எண்</string>
 </resources>

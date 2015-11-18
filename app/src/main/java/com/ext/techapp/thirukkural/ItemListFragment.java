@@ -15,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ext.techapp.thirukkural.adapter.CustomStringAdapter;
 import com.ext.techapp.thirukkural.dummy.DummyContent;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
@@ -28,10 +29,10 @@ import java.util.Map;
 
 /**
  * A fragment representing a list of Items.
- * <p>
+ * <p/>
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
- * <p>
+ * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
@@ -95,31 +96,32 @@ public class ItemListFragment extends Fragment implements AbsListView.OnItemClic
 
         String chapter = getArguments().getString(NAV_CHAPTER);
 
-            int id = getResources().getIdentifier("chapter_" + chapter, "raw", getActivity().getPackageName());
-            InputStream in = getResources().openRawResource(id);
+        int id = getResources().getIdentifier("chapter_" + chapter, "raw", getActivity().getPackageName());
+        InputStream in = getResources().openRawResource(id);
 
-            try {
-                Map<Integer, CoupletsXMLParser.Couplet> coupletsMap = new CoupletsXMLParser().coupletsList(in);
-                couplet_list_to_show = new CoupletsXMLParser.Couplet[10];
-                int i = 0;
-                for (Object key : coupletsMap.keySet()) {
-                    // int i = (int)key;
-                    CoupletsXMLParser.Couplet kural = coupletsMap.get(key);
-                    couplet_list_to_show[i] = kural;
-                    coupletsDisplayArray[i] = kural.getFirstLineTamil() + "\n " + kural.getSecondLineTamil();
-                    i++;
-                }
-
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            Map<Integer, CoupletsXMLParser.Couplet> coupletsMap = new CoupletsXMLParser().coupletsList(in);
+            couplet_list_to_show = new CoupletsXMLParser.Couplet[10];
+            int i = 0;
+            for (Object key : coupletsMap.keySet()) {
+                // int i = (int)key;
+                CoupletsXMLParser.Couplet kural = coupletsMap.get(key);
+                couplet_list_to_show[i] = kural;
+                coupletsDisplayArray[i] = kural.getFirstLineTamil() + "\n " + kural.getSecondLineTamil();
+                i++;
             }
 
-            List<String> list = Arrays.asList(coupletsDisplayArray);
-            // TODO: Change Adapter to display your content
-            mAdapter = new ArrayAdapter<String>(getActivity(),
-                    R.layout.simple_list_item_1, android.R.id.text1, list);
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<String> list = Arrays.asList(coupletsDisplayArray);
+        // TODO: Change Adapter to display your content
+        //  mAdapter = new ArrayAdapter<String>(getActivity(),
+        //         R.layout.simple_list_item_1, android.R.id.text1, list);
+        mAdapter = new CustomStringAdapter(getActivity(), R.layout.simple_list_item_1, android.R.id.text1, R.id.coupletNumber, couplet_list_to_show);
 
     }
 
@@ -160,7 +162,7 @@ public class ItemListFragment extends Fragment implements AbsListView.OnItemClic
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(getArguments().getInt(NAV_ITEM_ID),couplet_list_to_show[position]);
+            mListener.onFragmentInteraction(getArguments().getInt(NAV_ITEM_ID), couplet_list_to_show[position]);
         }
     }
 
@@ -182,14 +184,14 @@ public class ItemListFragment extends Fragment implements AbsListView.OnItemClic
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(int id,CoupletsXMLParser.Couplet couplet);
+        public void onFragmentInteraction(int id, CoupletsXMLParser.Couplet couplet);
     }
 
 }

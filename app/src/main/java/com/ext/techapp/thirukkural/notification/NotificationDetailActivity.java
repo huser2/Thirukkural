@@ -43,8 +43,9 @@ public class NotificationDetailActivity extends AppCompatActivity {
         //set kural in text field
 
         StringBuilder sb = new StringBuilder();
-        sb.append(couplet.getFirstLineTamil() + "<br/> " + couplet.getSecondLineTamil()).append("<br/><br/><br/>");
-
+        sb.append(couplet.getFirstLineTamil() + "<br/> " + couplet.getSecondLineTamil()).append("<br/><br/>");
+        sb.append("<b>அதிகாரம் :</b> ").append(couplet.getChapterCode()+"."+couplet.getChapterNameTamil());
+        sb.append("<br/><br/>");
 
         //set explanation text field
         sb.append("<b>மு.வ உரை</b><br/>" + couplet.getMuvaExplanation());
@@ -60,9 +61,11 @@ public class NotificationDetailActivity extends AppCompatActivity {
         sb.append("<br/><br/>").append(couplet.getFirstLineEnglish());
         sb.append("<br/>").append(couplet.getSecondLineEnglish());
         sb.append("<br/><br/>");
+        sb.append("<b>Chapter Name :</b> ").append(couplet.getChapterCode() + "." + couplet.getChapterNameEnglish());
+        sb.append("<br/><br/>");
+
         sb.append("<b>Explanation</b>").append("<br/>");
         sb.append(couplet.getEnglishExplanation());
-
         Spanned str = Html.fromHtml(sb.toString());
         couplet_detail.setText(str);
 
@@ -71,7 +74,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,19 +90,19 @@ public class NotificationDetailActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(sendIntent, "Share via"));
             }
         });
-
+*/
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
-        //getMenuInflater().inflate(R.menu.menu_item_detail, menu);
+        getMenuInflater().inflate(R.menu.menu_item_detail, menu);
 
         // Locate MenuItem with ShareActionProvider
-        //MenuItem item = menu.findItem(R.id.menu_item_share);
+        MenuItem item = menu.findItem(R.id.menu_item_share);
 
         // Fetch and store ShareActionProvider
-        //mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
         // Return true to display menu
         return super.onCreateOptionsMenu(menu);

@@ -45,8 +45,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         //set kural in text field
 
         StringBuilder sb = new StringBuilder();
-        sb.append(couplet.getFirstLineTamil() + "<br/> " + couplet.getSecondLineTamil()).append("<br/><br/><br/>");
-
+        sb.append(couplet.getFirstLineTamil() + "<br/> " + couplet.getSecondLineTamil()).append("<br/><br/>");
+        sb.append("<b>அதிகாரம் :</b> ").append(couplet.getChapterCode()+"."+couplet.getChapterNameTamil());
+        sb.append("<br/><br/>");
 
         //set explanation text field
         sb.append("<b>மு.வ உரை</b><br/>" + couplet.getMuvaExplanation());
@@ -62,6 +63,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         sb.append("<br/><br/>").append(couplet.getFirstLineEnglish());
         sb.append("<br/>").append(couplet.getSecondLineEnglish());
         sb.append("<br/><br/>");
+        sb.append("<b>Chapter Name :</b> ").append(couplet.getChapterCode() + "." + couplet.getChapterNameEnglish());
+        sb.append("<br/><br/>");
+
         sb.append("<b>Explanation</b>").append("<br/>");
         sb.append(couplet.getEnglishExplanation());
 
@@ -71,7 +75,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         couplet_detail.append("\n\n\n");
 
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +94,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(sendIntent, "Share via"));
             }
         });
-
+*/
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -99,13 +103,13 @@ public class ItemDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
-      // getMenuInflater().inflate(R.menu.menu_item_detail, menu);
+      getMenuInflater().inflate(R.menu.menu_item_detail, menu);
 
         // Locate MenuItem with ShareActionProvider
-      //  MenuItem item = menu.findItem(R.id.menu_item_share);
+       MenuItem item = menu.findItem(R.id.menu_item_share);
 
         // Fetch and store ShareActionProvider
-      //  mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
         // Return true to display menu
         return super.onCreateOptionsMenu(menu);
@@ -127,11 +131,13 @@ public class ItemDetailActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(sendIntent, "Share via"));
                 break;
 
-            case android.R.id.home:
-                Intent intent = new Intent();
+           case android.R.id.home:
+                Intent intent = new Intent(this,NavigationActivity.class);
+               Log.d("before...", intent + "");
                 intent.putExtra("selected_couplet",couplet);
                 intent.putExtra("couplet_number", couplet.getCoupletNumber());
-                navigateUpTo(getIntent());
+                //navigateUpTo(intent);
+               startActivity(intent);
                 break;
         }
         /*if (id == android.R.id.home) {
@@ -145,5 +151,16 @@ public class ItemDetailActivity extends AppCompatActivity {
             return true;
         }*/
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this,"Back likokkkkkkkkk",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,NavigationActivity.class);
+        intent.putExtra("selected_couplet",couplet);
+        intent.putExtra("couplet_number", couplet.getCoupletNumber());
+        Log.d("loss", intent + "");
+        startActivity(intent);
+   //     super.onBackPressed();
     }
 }
