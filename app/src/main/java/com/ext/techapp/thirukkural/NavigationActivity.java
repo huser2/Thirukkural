@@ -1,58 +1,35 @@
 package com.ext.techapp.thirukkural;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.provider.BaseColumns;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.widget.ActionMenuView;
-import android.support.v7.widget.SearchView;
-import android.text.InputType;
-import android.text.TextUtils;
-import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.ext.techapp.thirukkural.notification.DailyCoupletReceiver;
-import com.ext.techapp.thirukkural.notification.NotificationDetailActivity;
 import com.ext.techapp.thirukkural.preference.SettingsActivity;
-import com.ext.techapp.thirukkural.preference.SettingsFragment;
-
-
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -89,11 +66,11 @@ public class NavigationActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         boolean hasCouplet = getIntent().hasExtra("selected_couplet");
-        Log.d("navi  detail:", hasCouplet +"");
+
         if (hasCouplet) {
            // int itemId = bundle.getInt(ItemListFragment.NAV_ITEM_ID);
             //int resId = getResourceId("chapter_" + itemId, "id", getPackageName());
-            //Log.d("navi bundle is:", resId + ":" + itemId);
+
             CoupletsXMLParser.Couplet couplet = (CoupletsXMLParser.Couplet)getIntent().getSerializableExtra("selected_couplet");
             //default item or previously selected item
             int itemId= Integer.parseInt(couplet.getChapterCode());
@@ -183,14 +160,6 @@ public class NavigationActivity extends AppCompatActivity
         final MatrixCursor cursor = new MatrixCursor(new String[]{BaseColumns._ID, "searchCode"});
         // mAdapter.getFilter().filter(query.toString());
 
-        // searchView.setSuggestionsAdapter(mAdapter);
-       /* for (int i=1; i<SUGGESTIONS.length; i++) {
-            Log.d("query", SUGGESTIONS[i]+":"+query);
-            if (SUGGESTIONS[i].toLowerCase().contains(query.toLowerCase())) {
-                Log.d(" contains >>:",SUGGESTIONS[i].toLowerCase());
-                c.addRow(new Object[]{i, SUGGESTIONS[i]});
-            }
-        }*/
         int queryInt = Integer.parseInt(query);
         if (queryInt != 0 && queryInt <= 133) {
             cursor.addRow(new Object[]{0, "அதிகாரம்:" + queryInt});
@@ -199,7 +168,7 @@ public class NavigationActivity extends AppCompatActivity
             cursor.addRow(new Object[]{0, "குறள்:" + queryInt});
         }
 
-        Log.d("final :", cursor.getCount() + "");
+
         mAdapter.changeCursor(cursor);
         mAdapter.notifyDataSetChanged();
         //  searchView.setSuggestionsAdapter(mAdapter);
@@ -259,7 +228,7 @@ public class NavigationActivity extends AppCompatActivity
             bundle.putString(ItemListFragment.NAV_ITEM_TITLE, item.getTitle().toString());
             listFragment.setArguments(bundle);
 
-            Log.d("befor fragment", bundle + ":" + id);
+
             int chap_code = Integer.valueOf(chapter_code);
             navigationView.getMenu().getItem(chap_code).setChecked(true);
             getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, listFragment).commit();
@@ -291,7 +260,7 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public boolean onQueryTextChange(String s) {
-        Log.d("enter qry:", s);
+
         //s = ":"+s;
         if (s.length() > 0) {
             populateAdapter(s);

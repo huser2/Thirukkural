@@ -1,13 +1,9 @@
 package com.ext.techapp.thirukkural;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -15,12 +11,13 @@ import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.ext.techapp.thirukkural.db.Favorite;
+import com.ext.techapp.thirukkural.db.FavoritesDataSource;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
+
+import java.util.List;
 
 public class ItemDetailActivity extends AppCompatActivity {
 
@@ -28,6 +25,8 @@ public class ItemDetailActivity extends AppCompatActivity {
     TextView couplet_detail;
     private ShareActionProvider mShareActionProvider;
     CoupletsXMLParser.Couplet couplet;
+
+    FavoritesDataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +39,10 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         couplet =(CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
 
+        dataSource = new FavoritesDataSource(this);
+        dataSource.open();
+        List<Favorite> values = dataSource.getAllFavorites();
+        Log.d("stored...",values.size()+"");
 
         setTitle("குறள் எண்" + " " + couplet.getCoupletNumber());
         //set kural in text field
@@ -133,11 +136,16 @@ public class ItemDetailActivity extends AppCompatActivity {
 
            case android.R.id.home:
                 Intent intent = new Intent(this,NavigationActivity.class);
-               Log.d("before...", intent + "");
+
                 intent.putExtra("selected_couplet",couplet);
                 intent.putExtra("couplet_number", couplet.getCoupletNumber());
                 //navigateUpTo(intent);
                startActivity(intent);
+                break;
+
+            case R.id.menu_item_favourite:
+                dataSource.createFavorite(couplet.getChapterCode(),couplet.getCoupletNumber());
+                Log.d("added to favorite",couplet.getChapterCode());
                 break;
         }
         /*if (id == android.R.id.home) {
@@ -155,12 +163,23 @@ public class ItemDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this,"Back likokkkkkkkkk",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,NavigationActivity.class);
         intent.putExtra("selected_couplet",couplet);
         intent.putExtra("couplet_number", couplet.getCoupletNumber());
-        Log.d("loss", intent + "");
+
         startActivity(intent);
    //     super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        dataSource.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        dataSource.close();
+        super.onPause();
     }
 }

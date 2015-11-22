@@ -2,37 +2,21 @@ package com.ext.techapp.thirukkural.preference;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.ext.techapp.thirukkural.R;
 import com.ext.techapp.thirukkural.notification.DailyCoupletReceiver;
-import com.ext.techapp.thirukkural.notification.NotificationDetailActivity;
-import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Calendar;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -137,22 +121,17 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        //Toast.makeText(getActivity(), "clicked:" + key, Toast.LENGTH_SHORT).show();
 
         if (key.equals(getString(R.string.prefDailyKuralNotification))) {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             Boolean syncConnPref = sharedPref.getBoolean(getString(R.string.prefDailyKuralNotification), false);
-            //Toast.makeText(getActivity(), "valu:"+syncConnPref, Toast.LENGTH_SHORT).show();
-
             scheduleNotification(syncConnPref);
 
-            Log.d("syncConnPref", syncConnPref+"");
         }
 
     }
 
     private void scheduleNotification(boolean syncConnPref) {
-
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -162,7 +141,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
 
         if (now.after(calendar)) {
-            Log.d("Hey","Added a day and couplet");
             calendar.add(Calendar.DATE, 1);
         }
 
@@ -173,7 +151,6 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
         if (syncConnPref) {
-            Log.d("setting alarm",syncConnPref+"");
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
         } else {

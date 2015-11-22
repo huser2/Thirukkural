@@ -1,15 +1,10 @@
 package com.ext.techapp.thirukkural.preference;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ext.techapp.thirukkural.R;
 
