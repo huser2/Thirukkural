@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +18,8 @@ public class FavoritesDataSource {
 
     private SQLiteDatabase database;
     private FavoriteReaderDbHelper dbHelper;
-    private String[] allColumns = { Favorites.FeedEntry.COLUMN_NAME_ENTRY_ID,
-            Favorites.FeedEntry.COLUMN_CHAPTER_ID,Favorites.FeedEntry.COLUMN_COUPLET_ID };
+    private String[] allColumns = {
+            FavoriteColumns.FeedEntry.COLUMN_CHAPTER_ID,FavoriteColumns.FeedEntry.COLUMN_COUPLET_ID };
 
     public FavoritesDataSource(Context context) {
         dbHelper = new FavoriteReaderDbHelper(context);
@@ -31,34 +33,43 @@ public class FavoritesDataSource {
         dbHelper.close();
     }
 
-    public Favorite createFavorite(String chatper,String couplet) {
+    public Favorite createFavorite(String chapter,String couplet) {
         ContentValues values = new ContentValues();
-        values.put(Favorites.FeedEntry.COLUMN_CHAPTER_ID, chatper);
-        values.put(Favorites.FeedEntry.COLUMN_COUPLET_ID, couplet);
+        values.put(FavoriteColumns.FeedEntry.COLUMN_CHAPTER_ID, chapter);
+        values.put(FavoriteColumns.FeedEntry.COLUMN_COUPLET_ID, couplet);
 
-        long insertId = database.insert(Favorites.FeedEntry.TABLE_NAME, null,
-                values);
-        Cursor cursor = database.query(Favorites.FeedEntry.TABLE_NAME,
-                allColumns, Favorites.FeedEntry.COLUMN_NAME_ENTRY_ID + " = " + insertId, null,
+        Cursor cursorCheck = database.query(FavoriteColumns.FeedEntry.TABLE_NAME,
+                allColumns, FavoriteColumns.FeedEntry.COLUMN_COUPLET_ID + " = " + couplet, null,
                 null, null, null);
-        cursor.moveToFirst();
-        Favorite newComment = cursorToFavorite(cursor);
-        cursor.close();
+        cursorCheck.moveToFirst();
+        Favorite newComment=null;
+        if (cursorCheck.getCount() == 0) {
+            long insertId = database.insert(FavoriteColumns.FeedEntry.TABLE_NAME, null,
+                    values);
+            Cursor cursor = database.query(FavoriteColumns.FeedEntry.TABLE_NAME,
+                    allColumns, FavoriteColumns.FeedEntry.COLUMN_COUPLET_ID + " = " + insertId, null,
+                    null, null, null);
+            cursor.moveToFirst();
+            newComment = cursorToFavorite(cursor);
+            cursor.close();
+        }else {
+            newComment = cursorToFavorite(cursorCheck);
+            cursorCheck.close();
+        }
         return newComment;
     }
 
 
     public void deleteFavorite(Favorite favorite) {
-        long id = favorite.getCOLUMN_NAME_ENTRY_ID();
-        System.out.println("Comment deleted with id: " + id);
-        database.delete(Favorites.FeedEntry.TABLE_NAME, Favorites.FeedEntry.COLUMN_NAME_ENTRY_ID
+        long id = favorite.getCOLUMN_COUPLET_ID();
+        database.delete(FavoriteColumns.FeedEntry.TABLE_NAME, FavoriteColumns.FeedEntry.COLUMN_COUPLET_ID
                 + " = " + id, null);
     }
 
     public List<Favorite> getAllFavorites() {
         List<Favorite> favorites = new ArrayList<Favorite>();
 
-        Cursor cursor = database.query(Favorites.FeedEntry.TABLE_NAME,
+        Cursor cursor = database.query(FavoriteColumns.FeedEntry.TABLE_NAME,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
@@ -67,16 +78,14 @@ public class FavoritesDataSource {
             favorites.add(favorite);
             cursor.moveToNext();
         }
-
         cursor.close();
         return favorites;
     }
 
     private Favorite cursorToFavorite(Cursor cursor) {
         Favorite favorite = new Favorite();
-        favorite.setCOLUMN_NAME_ENTRY_ID(cursor.getLong(0));
-        favorite.setCOLUMN_CHAPTER_ID(cursor.getString(1));
-        favorite.setCOLUMN_COUPLET_ID(cursor.getString(2));
+        favorite.setCOLUMN_CHAPTER_ID(cursor.getLong(0));
+        favorite.setCOLUMN_COUPLET_ID(cursor.getLong(1));
         return favorite;
     }
 }

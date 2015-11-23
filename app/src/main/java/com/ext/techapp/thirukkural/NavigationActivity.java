@@ -68,12 +68,12 @@ public class NavigationActivity extends AppCompatActivity
         boolean hasCouplet = getIntent().hasExtra("selected_couplet");
 
         if (hasCouplet) {
-           // int itemId = bundle.getInt(ItemListFragment.NAV_ITEM_ID);
+            // int itemId = bundle.getInt(ItemListFragment.NAV_ITEM_ID);
             //int resId = getResourceId("chapter_" + itemId, "id", getPackageName());
 
-            CoupletsXMLParser.Couplet couplet = (CoupletsXMLParser.Couplet)getIntent().getSerializableExtra("selected_couplet");
+            CoupletsXMLParser.Couplet couplet = (CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
             //default item or previously selected item
-            int itemId= Integer.parseInt(couplet.getChapterCode());
+            int itemId = Integer.parseInt(couplet.getChapterCode());
             this.onNavigationItemSelected(navigationView.getMenu().getItem(itemId).setChecked(true));
             // navigationView. setCheckedItem(itemId);
         } else {
@@ -138,20 +138,6 @@ public class NavigationActivity extends AppCompatActivity
         // Getting selected (clicked) item suggestion
         searchView.setOnSuggestionListener(this);
         searchView.setOnQueryTextListener(this);
-        /*searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-
-            @Override
-            public boolean onClose() {
-                // Put your code here to clear and display the results
-                return false;
-            }
-
-        });*/
-        // AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView)searchView.
-        //       findViewById(getResources().getIdentifier("search_src_text", "id", getContext().getPackageName()));
-        //autoCompleteTextView.setThreshold(1);
-        //searchView.
-        //searchView.auo
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -208,30 +194,39 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         setTitle(item.getTitle());
-        if (id == R.id.thiruvalluvar) {
-            AboutFragment about = new AboutFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(AboutFragment.ABOUT_TEXT_ID, id);
-            about.setArguments(bundle);
-            navigationView.getMenu().findItem(R.id.thiruvalluvar).setChecked(true);
-            getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, about).commit();
+        switch (id) {
 
-        } else {
-            ItemListFragment listFragment = new ItemListFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt(ItemListFragment.NAV_ITEM_ID, id);
+            case R.id.thiruvalluvar:
 
-            StringTokenizer tokens = new StringTokenizer(item.getTitle().toString(), ".");
-            String chapter_code = tokens.nextToken();
-            bundle.putString(ItemListFragment.NAV_CHAPTER, chapter_code);
+                AboutFragment about = new AboutFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt(AboutFragment.ABOUT_TEXT_ID, id);
+                about.setArguments(bundle);
+                navigationView.getMenu().findItem(id).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, about).commit();
+                break;
 
-            bundle.putString(ItemListFragment.NAV_ITEM_TITLE, item.getTitle().toString());
-            listFragment.setArguments(bundle);
+            case R.id.saved_favorites:
 
+                break;
 
-            int chap_code = Integer.valueOf(chapter_code);
-            navigationView.getMenu().getItem(chap_code).setChecked(true);
-            getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, listFragment).commit();
+            default:
+
+                ItemListFragment listFragment = new ItemListFragment();
+                bundle = new Bundle();
+                bundle.putInt(ItemListFragment.NAV_ITEM_ID, id);
+
+                StringTokenizer tokens = new StringTokenizer(item.getTitle().toString(), ".");
+                String chapter_code = tokens.nextToken();
+                bundle.putString(ItemListFragment.NAV_CHAPTER, chapter_code);
+
+                bundle.putString(ItemListFragment.NAV_ITEM_TITLE, item.getTitle().toString());
+                listFragment.setArguments(bundle);
+
+                int chap_code = Integer.valueOf(chapter_code);
+                navigationView.getMenu().findItem(id).setChecked(true);
+                getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, listFragment).commit();
+                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -300,7 +295,7 @@ public class NavigationActivity extends AppCompatActivity
 
             resource_id = this.getResources().getIdentifier("chapter_" + chapter_code, "raw", this.getPackageName());
             InputStream in = this.getResources().openRawResource(resource_id);
-            CoupletsXMLParser.Couplet couplet = getCouplet(in,query_code);
+            CoupletsXMLParser.Couplet couplet = getCouplet(in, query_code);
 
             Intent intent = new Intent(this, ItemDetailActivity.class);
             intent.putExtra("couplet_number", query_code);
@@ -312,8 +307,8 @@ public class NavigationActivity extends AppCompatActivity
         return true;
     }
 
-    public CoupletsXMLParser.Couplet getCouplet(InputStream in, int query_code){
-        CoupletsXMLParser.Couplet couplet=null;
+    public CoupletsXMLParser.Couplet getCouplet(InputStream in, int query_code) {
+        CoupletsXMLParser.Couplet couplet = null;
         try {
             Map<Integer, CoupletsXMLParser.Couplet> coupletsMap = new CoupletsXMLParser().coupletsList(in);
             CoupletsXMLParser.Couplet[] couplet_list_to_show = new CoupletsXMLParser.Couplet[10];
@@ -325,16 +320,16 @@ public class NavigationActivity extends AppCompatActivity
                 i++;
             }
 
-            int kural = query_code%10;
-            if (kural>0){
-                kural=kural-1;
+            int kural = query_code % 10;
+            if (kural > 0) {
+                kural = kural - 1;
             }
-            couplet=couplet_list_to_show[kural];
+            couplet = couplet_list_to_show[kural];
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return  couplet;
+        return couplet;
     }
 }

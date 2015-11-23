@@ -8,6 +8,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="saved_favorites">Favorites</string>
+
     <string name="thiruvalluvar">திருவள்ளுவர் </string>
     <string name="share_kural">Share</string>
 
@@ -164,7 +168,8 @@
 \n<br/>This estimate is based on linguistic analysis of his writings, as there is no archaeological evidence for when he lived.
 \n<br/>He is sometimes also called Theiva Pulavar ("Divine Poet"), Valluvar, Poyyamozhi Pulavar, Senna Pothar, Gnana Vettiyan or Ayyan.
 
-\n<br/>There are several claims regarding where he lived, but none of them have been verified. One legend associates him with Madurai, the ancient capital of the Pandya rulers who vigorously promoted Tamil literature. According to another he was born and not lived in Mylapore, a part of present day Madras, and traveled to Madurai to submit the Thirukural, for approval of the king (Pandian) and his college of poets.
+\n<br/>There are several claims regarding where he lived, but none of them have been verified. One legend associates him with Madurai, the ancient capital of the Pandya rulers who vigorously promoted Tamil literature.
+        According to another he was born and not lived in Mylapore, a part of present day Madras, and traveled to Madurai to submit the Thirukural, for approval of the king (Pandian) and his college of poets.\n\n\n\n
 
 
     </string>

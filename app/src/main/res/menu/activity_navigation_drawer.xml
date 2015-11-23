@@ -3,6 +3,7 @@
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/thiruvalluvar" android:title="@string/thiruvalluvar"/>
+        <item android:id="@+id/saved_favorites" android:title="@string/saved_favorites"/>
         <item android:id="@+id/chapter_1" android:title="@string/chapter_1"/>
         <item android:id="@+id/chapter_2" android:title="@string/chapter_2"/>
         <item android:id="@+id/chapter_3" android:title="@string/chapter_3"/>

@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ext.techapp.thirukkural.db.Favorite;
+import com.ext.techapp.thirukkural.db.FavoriteColumns;
 import com.ext.techapp.thirukkural.db.FavoritesDataSource;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
@@ -41,6 +43,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         dataSource = new FavoritesDataSource(this);
         dataSource.open();
+
+
         List<Favorite> values = dataSource.getAllFavorites();
         Log.d("stored...",values.size()+"");
 
@@ -77,27 +81,6 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         couplet_detail.append("\n\n\n");
 
-
-        /*final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-               //         .setAction("Action", null).show();
-                //MenuItem item = menu.findItem(R.id.menu_item_share);
-               // mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                couplet_detail =(TextView) findViewById(R.id.couplet_detail);
-                String toSend = couplet_detail.getText().toString();
-                toSend = getTitle()+"\n\n"+toSend;
-                sendIntent.putExtra(Intent.EXTRA_TEXT, toSend);
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "Share via"));
-            }
-        });
-*/
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -136,17 +119,18 @@ public class ItemDetailActivity extends AppCompatActivity {
 
            case android.R.id.home:
                 Intent intent = new Intent(this,NavigationActivity.class);
-
-                intent.putExtra("selected_couplet",couplet);
+               intent.putExtra("selected_couplet",couplet);
                 intent.putExtra("couplet_number", couplet.getCoupletNumber());
                 //navigateUpTo(intent);
                startActivity(intent);
                 break;
 
             case R.id.menu_item_favourite:
-                dataSource.createFavorite(couplet.getChapterCode(),couplet.getCoupletNumber());
-                Log.d("added to favorite",couplet.getChapterCode());
+                dataSource.createFavorite(couplet.getChapterCode(), couplet.getCoupletNumber());
+                Toast.makeText(ItemDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.menu_item_home:
+                startActivity(new Intent(this,NavigationActivity.class));
         }
         /*if (id == android.R.id.home) {
             // This ID represents the Home or Up button. In the case of this
