@@ -20,8 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.ext.techapp.thirukkural.preference.SettingsActivity;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
@@ -35,7 +37,7 @@ import java.util.StringTokenizer;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ItemListFragment.OnListFragmentInteractionListener,
-        AboutFragment.OnFragmentInteractionListener, SearchView.OnSuggestionListener, SearchView.OnQueryTextListener {
+        AboutFragment.OnFragmentInteractionListener, SearchView.OnSuggestionListener, SearchView.OnQueryTextListener, FavoriteFragment.OnListFragmentInteractionListener {
 
 
     NavigationView navigationView;
@@ -61,29 +63,16 @@ public class NavigationActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        boolean hasCouplet = getIntent().hasExtra("selected_couplet");
-
-        if (hasCouplet) {
-            // int itemId = bundle.getInt(ItemListFragment.NAV_ITEM_ID);
-            //int resId = getResourceId("chapter_" + itemId, "id", getPackageName());
-
-            CoupletsXMLParser.Couplet couplet = (CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
-            //default item or previously selected item
-            int itemId = Integer.parseInt(couplet.getChapterCode());
-            this.onNavigationItemSelected(navigationView.getMenu().getItem(itemId).setChecked(true));
-            // navigationView. setCheckedItem(itemId);
+        boolean hasTitle = getIntent().hasExtra(ItemListFragment.NAV_ITEM_ID);
+        if (hasTitle) {
+            int itemId = getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0);
+            this.onNavigationItemSelected(navigationView.getMenu().findItem(itemId).setChecked(true));
         } else {
-            //   aboutThirukkural = (TextView)findViewById(R.id.about_thiruvalluvar);
-            //aboutThirukkural.clearComposingText();
-            // aboutThirukkural.setText(R.string.about_thirukkural);
-
             AboutFragment about = new AboutFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, about).commit();
-
         }
 
         final String[] from = new String[]{"searchCode"};
@@ -192,7 +181,7 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Log.d("id is", id + "");
         setTitle(item.getTitle());
         switch (id) {
 
@@ -200,14 +189,19 @@ public class NavigationActivity extends AppCompatActivity
 
                 AboutFragment about = new AboutFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt(AboutFragment.ABOUT_TEXT_ID, id);
+                bundle.putInt(ItemListFragment.NAV_ITEM_ID, id);
                 about.setArguments(bundle);
                 navigationView.getMenu().findItem(id).setChecked(true);
                 getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, about).commit();
                 break;
 
             case R.id.saved_favorites:
-
+                navigationView.getMenu().findItem(id).setChecked(true);
+                FavoriteFragment favoriteFragment = new FavoriteFragment();
+                bundle = new Bundle();
+                bundle.putInt(ItemListFragment.NAV_ITEM_ID, id);
+                favoriteFragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, favoriteFragment).commit();
                 break;
 
             default:
@@ -237,7 +231,7 @@ public class NavigationActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(int id, CoupletsXMLParser.Couplet couplet) {
         Intent intent = new Intent(this, ItemDetailActivity.class);
-        intent.putExtra("couplet_number", id);
+        intent.putExtra(ItemListFragment.NAV_ITEM_ID, id);
         intent.putExtra("selected_couplet", couplet);
         startActivity(intent);
     }
@@ -298,13 +292,21 @@ public class NavigationActivity extends AppCompatActivity
             CoupletsXMLParser.Couplet couplet = getCouplet(in, query_code);
 
             Intent intent = new Intent(this, ItemDetailActivity.class);
-            intent.putExtra("couplet_number", query_code);
+            // intent.putExtra("couplet_number", query_code);
             intent.putExtra("selected_couplet", couplet);
             startActivity(intent);
 
         }
 
         return true;
+    }
+
+    @Override
+    public void onFavoriteFragmentInteraction(int id, CoupletsXMLParser.Couplet couplet) {
+        Intent intent = new Intent(this, ItemDetailActivity.class);
+        intent.putExtra(ItemListFragment.NAV_ITEM_ID, id);
+        intent.putExtra("selected_couplet", couplet);
+        startActivity(intent);
     }
 
     public CoupletsXMLParser.Couplet getCouplet(InputStream in, int query_code) {
@@ -332,4 +334,6 @@ public class NavigationActivity extends AppCompatActivity
         }
         return couplet;
     }
+
+
 }

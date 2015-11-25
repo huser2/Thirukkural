@@ -76,8 +76,7 @@ public class AboutFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         TextView abouTextView = (TextView)view.findViewById(R.id.about_fragment_text);
-        if(getArguments()!= null&&getArguments().getInt(AboutFragment.ABOUT_TEXT_ID)==R.id.thiruvalluvar) {
-           // Spanned str = Html.fromHtml(sb.toString());
+        if(getArguments()!= null&&getArguments().getInt(ItemListFragment.NAV_ITEM_ID)==R.id.thiruvalluvar) {
             abouTextView.setText(R.string.about_thiruvalluvar);
         }
         return view;

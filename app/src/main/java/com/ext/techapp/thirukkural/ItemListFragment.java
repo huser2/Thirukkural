@@ -157,7 +157,7 @@ public class ItemListFragment extends Fragment implements AbsListView.OnItemClic
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(getArguments().getInt(NAV_ITEM_ID), couplet_list_to_show[position]);
+            mListener.onFragmentInteraction(getArguments().getInt(NAV_ITEM_ID),couplet_list_to_show[position]);
         }
     }
 

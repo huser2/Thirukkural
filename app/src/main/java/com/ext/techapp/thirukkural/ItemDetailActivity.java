@@ -46,7 +46,6 @@ public class ItemDetailActivity extends AppCompatActivity {
 
 
         List<Favorite> values = dataSource.getAllFavorites();
-        Log.d("stored...",values.size()+"");
 
         setTitle("குறள் எண்" + " " + couplet.getCoupletNumber());
         //set kural in text field
@@ -119,8 +118,8 @@ public class ItemDetailActivity extends AppCompatActivity {
 
            case android.R.id.home:
                 Intent intent = new Intent(this,NavigationActivity.class);
-               intent.putExtra("selected_couplet",couplet);
-                intent.putExtra("couplet_number", couplet.getCoupletNumber());
+                intent.putExtra("selected_couplet",couplet);
+               intent.putExtra(ItemListFragment.NAV_ITEM_ID,getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0));
                 //navigateUpTo(intent);
                startActivity(intent);
                 break;
@@ -149,8 +148,7 @@ public class ItemDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this,NavigationActivity.class);
         intent.putExtra("selected_couplet",couplet);
-        intent.putExtra("couplet_number", couplet.getCoupletNumber());
-
+        intent.putExtra(ItemListFragment.NAV_ITEM_ID,getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0));
         startActivity(intent);
    //     super.onBackPressed();
     }
@@ -166,4 +164,10 @@ public class ItemDetailActivity extends AppCompatActivity {
         dataSource.close();
         super.onPause();
     }
+    @Override
+    protected void onDestroy() {
+        dataSource.close();
+        super.onDestroy();
+    }
+
 }
