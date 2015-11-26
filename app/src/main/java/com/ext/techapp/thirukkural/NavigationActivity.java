@@ -68,8 +68,8 @@ public class NavigationActivity extends AppCompatActivity
 
         boolean hasTitle = getIntent().hasExtra(ItemListFragment.NAV_ITEM_ID);
         if (hasTitle) {
-            int itemId = getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0);
-            this.onNavigationItemSelected(navigationView.getMenu().findItem(itemId).setChecked(true));
+                int itemId = getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0);
+                this.onNavigationItemSelected(navigationView.getMenu().findItem(itemId).setChecked(true));
         } else {
             AboutFragment about = new AboutFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, about).commit();
@@ -181,7 +181,6 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Log.d("id is", id + "");
         setTitle(item.getTitle());
         switch (id) {
 
@@ -274,7 +273,7 @@ public class NavigationActivity extends AppCompatActivity
         String query = splitter.next();
         int query_code = Integer.valueOf(query);
         if (selected.contains("அதிகாரம்")) {
-            this.onNavigationItemSelected(navigationView.getMenu().getItem(query_code).setChecked(true));
+            this.onNavigationItemSelected(navigationView.getMenu().findItem(getResourceId("chapter_"+query_code,"id",getPackageName())).setChecked(true));
             searchItem.collapseActionView();
         }
         if (selected.contains("குறள்")) {
@@ -293,6 +292,7 @@ public class NavigationActivity extends AppCompatActivity
 
             Intent intent = new Intent(this, ItemDetailActivity.class);
             // intent.putExtra("couplet_number", query_code);
+            intent.putExtra(ItemListFragment.NAV_ITEM_ID, getResourceId("chapter_"+chapter_code,"id",getPackageName()));
             intent.putExtra("selected_couplet", couplet);
             startActivity(intent);
 

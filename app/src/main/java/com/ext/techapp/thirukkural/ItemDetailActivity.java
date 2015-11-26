@@ -47,7 +47,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         List<Favorite> values = dataSource.getAllFavorites();
 
-        setTitle("குறள் எண்" + " " + couplet.getCoupletNumber());
+        setTitle("குறள் " + " " + couplet.getCoupletNumber());
         //set kural in text field
 
         StringBuilder sb = new StringBuilder();
@@ -128,6 +128,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                 dataSource.createFavorite(couplet.getChapterCode(), couplet.getCoupletNumber());
                 Toast.makeText(ItemDetailActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.menu_item_home:
                 startActivity(new Intent(this,NavigationActivity.class));
         }

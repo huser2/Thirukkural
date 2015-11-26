@@ -11,6 +11,7 @@
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="saved_favorites">பிடித்த குறள்கள்</string>
+    <string name="remove_favorite">Remove Favorite</string>
 
     <string name="thiruvalluvar">திருவள்ளுவர் </string>
     <string name="share_kural">Share</string>

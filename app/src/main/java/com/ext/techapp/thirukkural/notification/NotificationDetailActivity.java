@@ -39,7 +39,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         couplet =(CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
 
 
-        setTitle("குறள் எண்" + " " + couplet.getCoupletNumber());
+        setTitle("குறள்" + " " + couplet.getCoupletNumber());
         //set kural in text field
 
         StringBuilder sb = new StringBuilder();
@@ -74,23 +74,6 @@ public class NotificationDetailActivity extends AppCompatActivity {
         // Show the Up button in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //      .setAction("Action", null).show();
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                couplet_detail = (TextView) findViewById(R.id.couplet_detail);
-                String toSend = couplet_detail.getText().toString();
-                toSend = getTitle() + "\n\n" + toSend;
-                sendIntent.putExtra(Intent.EXTRA_TEXT, toSend);
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "Share via"));
-            }
-        });
-*/
     }
 
     @Override
@@ -107,6 +90,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         // Return true to display menu
         return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -125,22 +109,9 @@ public class NotificationDetailActivity extends AppCompatActivity {
                 break;
 
             case android.R.id.home:
-                Intent intent = new Intent();
-                intent.putExtra("selected_couplet",couplet);
-                intent.putExtra("couplet_number", couplet.getCoupletNumber());
                 navigateUpTo(getIntent());
                 break;
         }
-        /*if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(getIntent());
-            return true;
-        }*/
         return super.onOptionsItemSelected(item);
     }
 
