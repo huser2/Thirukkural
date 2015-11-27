@@ -14,8 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.ext.techapp.thirukkural.ItemListFragment;
+import com.ext.techapp.thirukkural.NavigationActivity;
 import com.ext.techapp.thirukkural.R;
+import com.ext.techapp.thirukkural.db.FavoritesDataSource;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
 public class NotificationDetailActivity extends AppCompatActivity {
@@ -25,6 +29,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
     private ShareActionProvider mShareActionProvider;
     CoupletsXMLParser.Couplet couplet;
 
+    FavoritesDataSource dataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +39,13 @@ public class NotificationDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        couplet_detail = (TextView)findViewById(R.id.couplet_detail);
+        dataSource = new FavoritesDataSource(this);
+        dataSource.open();
 
-        couplet =(CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
+
+        couplet_detail = (TextView) findViewById(R.id.couplet_detail);
+
+        couplet = (CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
 
 
         setTitle("குறள்" + " " + couplet.getCoupletNumber());
@@ -44,7 +53,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         sb.append(couplet.getFirstLineTamil() + "<br/> " + couplet.getSecondLineTamil()).append("<br/><br/>");
-        sb.append("<b>அதிகாரம் :</b> ").append(couplet.getChapterCode()+"."+couplet.getChapterNameTamil());
+        sb.append("<b>அதிகாரம் :</b> ").append(couplet.getChapterCode() + "." + couplet.getChapterNameTamil());
         sb.append("<br/><br/>");
 
         //set explanation text field
@@ -96,13 +105,13 @@ public class NotificationDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.menu_item_share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                couplet_detail =(TextView) findViewById(R.id.couplet_detail);
+                couplet_detail = (TextView) findViewById(R.id.couplet_detail);
                 String toSend = couplet_detail.getText().toString();
-                toSend = getTitle()+"\n\n"+toSend;
+                toSend = getTitle() + "\n\n" + toSend;
                 sendIntent.putExtra(Intent.EXTRA_TEXT, toSend);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Share via"));
@@ -111,8 +120,35 @@ public class NotificationDetailActivity extends AppCompatActivity {
             case android.R.id.home:
                 navigateUpTo(getIntent());
                 break;
+
+            case R.id.menu_item_favourite:
+                dataSource.createFavorite(couplet.getChapterCode(), couplet.getCoupletNumber());
+                Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.menu_item_home:
+                startActivity(new Intent(this, NavigationActivity.class));
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        dataSource.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        dataSource.close();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        dataSource.close();
+        super.onDestroy();
     }
 
 }

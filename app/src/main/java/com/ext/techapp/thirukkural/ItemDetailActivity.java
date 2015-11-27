@@ -75,8 +75,10 @@ public class ItemDetailActivity extends AppCompatActivity {
         sb.append("<b>Explanation</b>").append("<br/>");
         sb.append(couplet.getEnglishExplanation());
 
+
         Spanned str = Html.fromHtml(sb.toString());
         couplet_detail.setText(str);
+
 
         couplet_detail.append("\n\n\n");
 
@@ -132,16 +134,6 @@ public class ItemDetailActivity extends AppCompatActivity {
             case R.id.menu_item_home:
                 startActivity(new Intent(this,NavigationActivity.class));
         }
-        /*if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(getIntent());
-            return true;
-        }*/
         return super.onOptionsItemSelected(item);
     }
 

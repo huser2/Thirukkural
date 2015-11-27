@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+
+
         <item android:id="@+id/thiruvalluvar" android:title="@string/thiruvalluvar"/>
         <item android:id="@+id/saved_favorites" android:title="@string/saved_favorites"/>
+    <item android:id="@+id/section_virtue" android:title="அறத்துப்பால்">
+        <menu>
         <item android:id="@+id/chapter_1" android:title="@string/chapter_1"/>
         <item android:id="@+id/chapter_2" android:title="@string/chapter_2"/>
         <item android:id="@+id/chapter_3" android:title="@string/chapter_3"/>
@@ -42,6 +45,11 @@
         <item android:id="@+id/chapter_36" android:title="@string/chapter_36"/>
         <item android:id="@+id/chapter_37" android:title="@string/chapter_37"/>
         <item android:id="@+id/chapter_38" android:title="@string/chapter_38"/>
+</menu></item>
+
+
+        <item android:id="@+id/section_wealth" android:title="பொருட்பால்">
+            <menu>
         <item android:id="@+id/chapter_39" android:title="@string/chapter_39"/>
         <item android:id="@+id/chapter_40" android:title="@string/chapter_40"/>
         <item android:id="@+id/chapter_41" android:title="@string/chapter_41"/>
@@ -112,6 +120,11 @@
         <item android:id="@+id/chapter_106" android:title="@string/chapter_106"/>
         <item android:id="@+id/chapter_107" android:title="@string/chapter_107"/>
         <item android:id="@+id/chapter_108" android:title="@string/chapter_108"/>
+        </menu></item>
+
+
+        <item android:id="@+id/section_love" android:title="காமத்துப்பால்">
+            <menu>
         <item android:id="@+id/chapter_109" android:title="@string/chapter_109"/>
         <item android:id="@+id/chapter_110" android:title="@string/chapter_110"/>
         <item android:id="@+id/chapter_111" android:title="@string/chapter_111"/>
@@ -137,7 +150,7 @@
         <item android:id="@+id/chapter_131" android:title="@string/chapter_131"/>
         <item android:id="@+id/chapter_132" android:title="@string/chapter_132"/>
         <item android:id="@+id/chapter_133" android:title="@string/chapter_133"/>
-    </group>
+    </menu></item>
 
 
 </menu>

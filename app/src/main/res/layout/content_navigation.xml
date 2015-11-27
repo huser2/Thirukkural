@@ -14,7 +14,7 @@
     <FrameLayout
         android:id="@+id/item_list_fragment_layout"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         />
 
 </RelativeLayout>
