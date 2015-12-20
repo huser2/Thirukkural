@@ -4,7 +4,7 @@
 
     <!-- permission required to use Alarm Manager -->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--uses-permission android:name="android.permission.INTERNET" /-->
 
     <application
         android:allowBackup="true"

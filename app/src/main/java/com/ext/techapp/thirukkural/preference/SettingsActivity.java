@@ -21,7 +21,8 @@ public class SettingsActivity extends AppCompatActivity implements SettingsFragm
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //set default values
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        // commented for bug fix:
+       // PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         SettingsFragment settings = new SettingsFragment();
         getFragmentManager().beginTransaction().replace(R.id.action_settings_layout, settings).commit();
