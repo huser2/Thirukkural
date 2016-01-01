@@ -17,6 +17,7 @@ import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -99,6 +100,19 @@ public class DailyCoupletReceiver extends BroadcastReceiver {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        //store daily couplet detail in file
+        String FILENAME = "daily_couplet.txt";
+        if(couplet!=null) {
+            String str = "chapter_" + couplet.getChapterCode() + "," + couplet.getCoupletNumber();
+            try {
+                FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+                fos.write(str.getBytes());
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return couplet;
     }

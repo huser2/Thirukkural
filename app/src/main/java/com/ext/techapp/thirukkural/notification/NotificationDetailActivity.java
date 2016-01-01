@@ -22,6 +22,15 @@ import com.ext.techapp.thirukkural.R;
 import com.ext.techapp.thirukkural.db.FavoritesDataSource;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+
 public class NotificationDetailActivity extends AppCompatActivity {
 
 
@@ -47,6 +56,27 @@ public class NotificationDetailActivity extends AppCompatActivity {
 
         couplet = (CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
 
+        if (couplet == null) {
+            //find the today's couplet from file
+            String FILENAME = "daily_couplet.txt";
+            try {
+                FileInputStream fin = openFileInput(FILENAME);
+                InputStreamReader inputStreamReader = new InputStreamReader(fin);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                StringBuilder sb = new StringBuilder();
+                String line;
+                if ((line = bufferedReader.readLine()) != null) {
+                    // sb.append(line);
+                    String[] arr = line.split(",");
+                    String chapter = arr[0];
+                    String coupletNumber = arr[1];
+                    couplet = getCouplet(chapter, coupletNumber);
+                }
+                fin.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         setTitle("குறள்" + " " + couplet.getCoupletNumber());
         //set kural in text field
@@ -84,6 +114,33 @@ public class NotificationDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
+
+    public CoupletsXMLParser.Couplet getCouplet(String chapter, String coNumber) {
+        int id = this.getResources().getIdentifier(chapter, "raw", this.getPackageName());
+        InputStream in = this.getResources().openRawResource(id);
+        CoupletsXMLParser.Couplet couplet = null;
+        try {
+            Map<Integer, CoupletsXMLParser.Couplet> coupletsMap = new CoupletsXMLParser().coupletsList(in);
+            CoupletsXMLParser.Couplet[] couplet_list_to_show = new CoupletsXMLParser.Couplet[10];
+
+            for (Object key : coupletsMap.keySet()) {
+                // int i = (int)key;
+                CoupletsXMLParser.Couplet kural = coupletsMap.get(key);
+                if (kural.getCoupletNumber().equals(coNumber)) {
+                    couplet = kural;
+                }
+            }
+
+
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return couplet;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

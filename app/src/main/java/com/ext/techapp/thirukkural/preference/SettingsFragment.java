@@ -157,6 +157,15 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             alarmManager.cancel(pendingIntent);
         }
 
+        //for testing
+     /*   Intent intent = new Intent(getActivity(), DailyCoupletReceiver.class);
+        PendingIntent   alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                6000,
+                6000, alarmIntent);
+                */
     }
 
     @Override

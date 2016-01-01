@@ -5,6 +5,7 @@
 
         <item android:id="@+id/thiruvalluvar" android:title="@string/thiruvalluvar"/>
         <item android:id="@+id/saved_favorites" android:title="@string/saved_favorites"/>
+    <item android:id="@+id/today_couplet" android:title="@string/today_kural"/>
     <item android:id="@+id/section_virtue" android:title="அறத்துப்பால்">
         <menu>
         <item android:id="@+id/chapter_1" android:title="@string/chapter_1"/>

@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.ext.techapp.thirukkural.notification.NotificationDetailActivity;
 import com.ext.techapp.thirukkural.preference.SettingsActivity;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
@@ -202,7 +203,11 @@ public class NavigationActivity extends AppCompatActivity
                 favoriteFragment.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.item_list_fragment_layout, favoriteFragment).commit();
                 break;
-
+            case R.id.today_couplet:
+                navigationView.getMenu().findItem(id).setChecked(true);
+                Intent intent = new Intent(this, NotificationDetailActivity.class);
+                startActivity(intent);
+                break;
             default:
 
                 ItemListFragment listFragment = new ItemListFragment();

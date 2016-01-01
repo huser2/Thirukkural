@@ -1,5 +1,6 @@
 package com.ext.techapp.thirukkural;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -19,6 +20,10 @@ import com.ext.techapp.thirukkural.db.FavoriteColumns;
 import com.ext.techapp.thirukkural.db.FavoritesDataSource;
 import com.ext.techapp.thirukkural.xml.CoupletsXMLParser;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class ItemDetailActivity extends AppCompatActivity {
@@ -37,9 +42,9 @@ public class ItemDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        couplet_detail = (TextView)findViewById(R.id.couplet_detail);
+        couplet_detail = (TextView) findViewById(R.id.couplet_detail);
 
-        couplet =(CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
+        couplet = (CoupletsXMLParser.Couplet) getIntent().getSerializableExtra("selected_couplet");
 
         dataSource = new FavoritesDataSource(this);
         dataSource.open();
@@ -52,7 +57,7 @@ public class ItemDetailActivity extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         sb.append(couplet.getFirstLineTamil() + "<br/> " + couplet.getSecondLineTamil()).append("<br/><br/>");
-        sb.append("<b>அதிகாரம் :</b> ").append(couplet.getChapterCode()+"."+couplet.getChapterNameTamil());
+        sb.append("<b>அதிகாரம் :</b> ").append(couplet.getChapterCode() + "." + couplet.getChapterNameTamil());
         sb.append("<br/><br/>");
 
         //set explanation text field
@@ -90,13 +95,13 @@ public class ItemDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
-      getMenuInflater().inflate(R.menu.menu_item_detail, menu);
+        getMenuInflater().inflate(R.menu.menu_item_detail, menu);
 
         // Locate MenuItem with ShareActionProvider
-       MenuItem item = menu.findItem(R.id.menu_item_share);
+        MenuItem item = menu.findItem(R.id.menu_item_share);
 
         // Fetch and store ShareActionProvider
-         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
         // Return true to display menu
         return super.onCreateOptionsMenu(menu);
@@ -106,24 +111,24 @@ public class ItemDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.menu_item_share:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                couplet_detail =(TextView) findViewById(R.id.couplet_detail);
+                couplet_detail = (TextView) findViewById(R.id.couplet_detail);
                 String toSend = couplet_detail.getText().toString();
-                toSend = getTitle()+"\n\n"+toSend;
+                toSend = getTitle() + "\n\n" + toSend;
                 sendIntent.putExtra(Intent.EXTRA_TEXT, toSend);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Share via"));
                 break;
 
-           case android.R.id.home:
-                Intent intent = new Intent(this,NavigationActivity.class);
-                intent.putExtra("selected_couplet",couplet);
-               intent.putExtra(ItemListFragment.NAV_ITEM_ID,getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0));
+            case android.R.id.home:
+                Intent intent = new Intent(this, NavigationActivity.class);
+                intent.putExtra("selected_couplet", couplet);
+                intent.putExtra(ItemListFragment.NAV_ITEM_ID, getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0));
                 //navigateUpTo(intent);
-               startActivity(intent);
+                startActivity(intent);
                 break;
 
             case R.id.menu_item_favourite:
@@ -132,18 +137,18 @@ public class ItemDetailActivity extends AppCompatActivity {
                 break;
 
             case R.id.menu_item_home:
-                startActivity(new Intent(this,NavigationActivity.class));
+                startActivity(new Intent(this, NavigationActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this,NavigationActivity.class);
-        intent.putExtra("selected_couplet",couplet);
-        intent.putExtra(ItemListFragment.NAV_ITEM_ID,getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0));
+        Intent intent = new Intent(this, NavigationActivity.class);
+        intent.putExtra("selected_couplet", couplet);
+        intent.putExtra(ItemListFragment.NAV_ITEM_ID, getIntent().getIntExtra(ItemListFragment.NAV_ITEM_ID, 0));
         startActivity(intent);
-   //     super.onBackPressed();
+        //     super.onBackPressed();
     }
 
     @Override
@@ -157,6 +162,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         dataSource.close();
         super.onPause();
     }
+
     @Override
     protected void onDestroy() {
         dataSource.close();
